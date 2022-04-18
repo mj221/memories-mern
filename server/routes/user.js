@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {signin, signup} from '../controllers/users.js' // need .js extension for node but not react
+import {signin, signup} from '../controllers/user.js' // need .js extension for node but not react
 
 const router = express.Router();
 

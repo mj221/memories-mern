@@ -13,6 +13,16 @@ export const getPosts = () => async (dispatch) => {
 	}
 } 
 
+export const getPostsBySearch = (searchQuery) => async(dispatch) =>{
+	try{
+		const {data : {data}} = await api.fetchPostsBySearch(searchQuery)
+
+		console.log(data)
+	}catch(error){
+		console.log(error)
+	}
+}
+
 export const createPost = (post) => async (dispatch) =>{
 	try{
 		const {data} = await api.createPost(post)
@@ -41,9 +51,10 @@ export const deletePost = (id) => async (dispatch) =>{
 }
 
 export const likePost = (id) => async (dispatch) =>{
+	const user = JSON.parse(localStorage.getItem('profile'));
 	try{
-		const {data} = await api.likePost(id)
-		dispatch({type: LIKE, payload: data})
+		const {data} = await api.likePost(id, user?.token);
+		dispatch({type: LIKE, payload: data});
 	}catch(error){
 		console.log(error)
 	}
